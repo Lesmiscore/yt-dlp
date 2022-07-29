@@ -3694,6 +3694,36 @@ class download_range_func:
                 and self.chapters == other.chapters and self.ranges == other.ranges)
 
 
+def trim_chapters(chapters, start, end):
+    # assumptions:
+    # - chapters are always dense (https://github.com/yt-dlp/yt-dlp/blob/0f7247f88e15c424faa0f556e9d2e21ba320f501/yt_dlp/YoutubeDL.py#L2406-L2418)
+    # - chapters are sorted
+    if not chapters or (start is None and end is None):
+        return chapters
+
+    def seek(time, b=0):
+        for i, x in enumerate(chapters[b:], b):
+            if (x.get('start_time') or 0) <= time and x.get('end_time') is not None and time < x['end_time']:
+                return i
+
+    if start is None:
+        first_chapter = 0
+    else:
+        first_chapter = seek(start)
+
+    if end is None:
+        last_chapter = len(chapters) - 1
+    else:
+        last_chapter = seek(end, first_chapter)
+
+    # for yt-dlp's use case, it's rare to be used for clamping
+    new_chapters = [{
+        **x,
+        'start_time': max(x['start_time'] - start, 0) if x.get('start_time') is not None else None,
+        'end_time': min(x['end_time'] - start, end - start) if x.get('end_time') is not None else None,
+    } for x in chapters[first_chapter:last_chapter]]
+
+
 def parse_dfxp_time_expr(time_expr):
     if not time_expr:
         return
