@@ -823,7 +823,21 @@ class _JSInterpreter:
         return resf
 
 
+def js2py_ex(func):
+    def inner(*args, **kw):
+        try:
+            return func(*args, **kw)
+        except js2py.PyJsException as e:
+            raise JSInterpreter.Exception(e.msg, cause=e)
+
+    return inner
+
+
 class JSInterpreter(_JSInterpreter):
+
+    def __init__(self, code, objects=None):
+        super().__init__(code, objects)
+        self.ctx = js2py.EvalJs(objects or {})
 
     class Exception(ExtractorError):
         def __init__(self, msg, expr=None, *args, **kwargs):
@@ -831,14 +845,49 @@ class JSInterpreter(_JSInterpreter):
                 msg = f'{msg.rstrip()} in: {truncate_string(expr, 50, 50)}'
             super().__init__(msg, *args, **kwargs)
 
+    @js2py_ex
+    def interpret_statement(self, stmt, local_vars, allow_recursion=100):
+        code  = '''
+            function(stmt, local_vars){
+                Object.assign(this, local_vars);
+                return eval(stmt);
+            }
+        '''
+        return self.ctx.eval(code)(stmt, local_vars)
+
     def extract_object(self, objname):
         return getattr(self.ctx, objname)
 
     def extract_function(self, funcname):
-        return getattr(self.ctx, funcname)
-
-    def call_function(self, funcname, *args):
         try:
-            return self.extract_function(funcname)(args)
-        except js2py.PyJsException as e:
-            raise self.Exception(e.message, cause=e)
+            return getattr(self.ctx, funcname)
+        except:
+            return super().extract_function(funcname)
+
+    @js2py_ex
+    def call_function(self, funcname, *args):
+        return self.extract_function(funcname)(args)
+
+    def build_function(self, argnames, code, *global_stack):
+        nova = f'''
+            function(local_vars){{
+                Object.assign(this, local_vars);
+                return function ({",".join(argnames)}) {{
+                    {code}
+                }};
+            }}
+        '''
+
+        global_stack = list(global_stack) or [{}]
+        argnames = tuple(argnames)
+
+        @js2py_ex
+        def resf(args, kwargs={}, allow_recursion=100):
+            global_stack[0].update(itertools.zip_longest(argnames, args, fillvalue=None))
+            global_stack[0].update(kwargs)
+
+            return self.ctx.eval(nova)(dict(x for y in reversed(global_stack) for x in y.items()))
+
+        return resf
+
+JSInterpreter = _JSInterpreter
