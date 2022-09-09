@@ -8,6 +8,7 @@ import re
 
 import inspect
 import js2py
+import js2py.base
 
 from .utils import (
     NO_DEFAULT,
@@ -840,10 +841,24 @@ class JSInterpreter(_JSInterpreter):
 
     def __init__(self, code, objects=None):
         objects = objects or {}
-        objects['_ytdlp_unified_timestamp'] = unified_timestamp
+
+        def unitime(value):
+            print('unitime:', value)
+            return unified_timestamp(js2py.base.to_python(value))
+
+        objects['_ytdlp_unified_timestamp'] = unitime
+        objects['print'] = print
         super().__init__(code, objects)
         self.ctx = js2py.EvalJs(objects)
         self.typeof = self.ctx.eval('function(obj){return typeof obj}')
+
+        self.ctx._context['var'].own['Date'].update({
+            # force update the flags here to do the magic below
+            'writable': True,
+            'enumerable': False,
+            'configurable': True,
+        })
+
         self.ctx.execute('''
             // https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
 
@@ -871,19 +886,19 @@ class JSInterpreter(_JSInterpreter):
             }
 
             // we'll patch Date constructor to pass it an acceptable (to js2py, not by spec) value
-            _origDate = Date;
-            function Date(){
+            const _origDate = Date;
+            window.Date = function Date(){
                 if (!(this instanceof Date)) {
                     // called as function
                     return _origDate();
                 }
-                if(arguments.length !== 0){
+                if(arguments.length !== 1){
                     _origDate.apply(this, arguments);
                     return;
                 }
                 // use the host's great datetime parser!
-                _origDate.call(this, _ytdlp_unified_timestamp(arguments[1]));
-            }
+                _origDate.call(this, _ytdlp_unified_timestamp(arguments[0]));
+            };
         ''')
 
     @js2py_ex
@@ -929,6 +944,7 @@ class JSInterpreter(_JSInterpreter):
         return self.build_function(argnames, code, *global_stack)
 
     def build_function(self, argnames, code, *global_stack):
+        code = re.sub(r'catch\((.)\){', r'catch(\1){print(\1.toString());', code)
         nova = f'''
             function(local_vars){{
                 _assign(this, local_vars);
