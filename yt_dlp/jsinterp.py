@@ -839,8 +839,10 @@ def js2py_ex(func):
 class JSInterpreter(_JSInterpreter):
 
     def __init__(self, code, objects=None):
+        objects = objects or {}
+        objects['_ytdlp_unified_timestamp'] = unified_timestamp
         super().__init__(code, objects)
-        self.ctx = js2py.EvalJs(objects or {})
+        self.ctx = js2py.EvalJs(objects)
         self.typeof = self.ctx.eval('function(obj){return typeof obj}')
         self.ctx.execute('''
             // https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
@@ -866,6 +868,21 @@ class JSInterpreter(_JSInterpreter):
                     }
                 }
                 return to;
+            }
+
+            // we'll patch Date constructor to pass it an acceptable (to js2py, not by spec) value
+            _origDate = Date;
+            function Date(){
+                if (!(this instanceof Date)) {
+                    // called as function
+                    return _origDate();
+                }
+                if(arguments.length !== 0){
+                    _origDate.apply(this, arguments);
+                    return;
+                }
+                // use the host's great datetime parser!
+                _origDate.call(this, _ytdlp_unified_timestamp(arguments[1]));
             }
         ''')
 
