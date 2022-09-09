@@ -6,6 +6,7 @@ import math
 import operator
 import re
 
+import inspect
 import js2py
 
 from .utils import (
@@ -825,6 +826,8 @@ class _JSInterpreter:
 
 def js2py_ex(func):
     def inner(*args, **kw):
+        if any('/js2py/' in x.filename.replace('\\', '/') for x in inspect.stack()[:2]):
+            return func(args)
         try:
             return func(*args, **kw)
         except js2py.PyJsException as e:
@@ -866,12 +869,6 @@ class JSInterpreter(_JSInterpreter):
             }
         ''')
 
-    class Exception(ExtractorError):
-        def __init__(self, msg, expr=None, *args, **kwargs):
-            if expr is not None:
-                msg = f'{msg.rstrip()} in: {truncate_string(expr, 50, 50)}'
-            super().__init__(msg, *args, **kwargs)
-
     @js2py_ex
     def interpret_statement(self, stmt, local_vars, allow_recursion=100):
         code  = '''
@@ -911,11 +908,15 @@ class JSInterpreter(_JSInterpreter):
     def call_function(self, funcname, *args):
         return self.extract_function(funcname)(args)
 
+    def extract_function_from_code(self, argnames, code, *global_stack):
+        return self.build_function(argnames, code, *global_stack)
+
     def build_function(self, argnames, code, *global_stack):
         nova = f'''
-            function(code, local_vars){{
+            function(local_vars){{
                 _assign(this, local_vars);
-                return eval("function(){{"+code+"}}")();
+
+                {code}
             }}
         '''
         ek = self.ctx.eval(nova)
@@ -928,6 +929,6 @@ class JSInterpreter(_JSInterpreter):
             global_stack[0].update(itertools.zip_longest(argnames, args, fillvalue=None))
             global_stack[0].update(kwargs)
 
-            return ek(code, dict(x for y in reversed(global_stack) for x in y.items()))
+            return ek(dict(x for y in reversed(global_stack) for x in y.items()))
 
         return resf
