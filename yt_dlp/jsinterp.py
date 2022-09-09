@@ -828,7 +828,7 @@ def js2py_ex(func):
         try:
             return func(*args, **kw)
         except js2py.PyJsException as e:
-            raise JSInterpreter.Exception(e.msg, cause=e)
+            raise JSInterpreter.Exception(str(e), cause=e)
 
     return inner
 
@@ -838,6 +838,33 @@ class JSInterpreter(_JSInterpreter):
     def __init__(self, code, objects=None):
         super().__init__(code, objects)
         self.ctx = js2py.EvalJs(objects or {})
+        self.typeof = self.ctx.eval('function(obj){return typeof obj}')
+        self.ctx.execute('''
+            // https://developer.mozilla.org/docs/Web/JavaScript/Reference/Global_Objects/Object/assign
+
+            function _assign(target, varArgs) { // .length of function is 2
+                'use strict';
+                if (target === null || target === undefined) {
+                    throw new TypeError('Cannot convert undefined or null to object');
+                }
+
+                var to = Object(target);
+
+                for (var index = 1; index < arguments.length; index++) {
+                    var nextSource = arguments[index];
+
+                    if (nextSource !== null && nextSource !== undefined) {
+                        for (var nextKey in nextSource) {
+                            // Avoid bugs when hasOwnProperty is shadowed
+                            if (Object.prototype.hasOwnProperty.call(nextSource, nextKey)) {
+                            to[nextKey] = nextSource[nextKey];
+                            }
+                        }
+                    }
+                }
+                return to;
+            }
+        ''')
 
     class Exception(ExtractorError):
         def __init__(self, msg, expr=None, *args, **kwargs):
@@ -849,20 +876,36 @@ class JSInterpreter(_JSInterpreter):
     def interpret_statement(self, stmt, local_vars, allow_recursion=100):
         code  = '''
             function(stmt, local_vars){
-                Object.assign(this, local_vars);
+                _assign(this, local_vars);
                 return eval(stmt);
             }
         '''
-        return self.ctx.eval(code)(stmt, local_vars)
+        return self.ctx.eval(code)(stmt, local_vars), True
 
     def extract_object(self, objname):
         return getattr(self.ctx, objname)
 
     def extract_function(self, funcname):
         try:
-            return getattr(self.ctx, funcname)
-        except:
+            sttr = getattr(self.ctx, funcname)
+        except Exception:
+            sttr = None
+        if self.typeof(sttr) != 'function':
             return super().extract_function(funcname)
+
+        nova = f'''
+            function(func, args, local_vars){{
+                _assign(this, local_vars);
+                return func(..args);
+            }}
+        '''
+        ek = self.ctx.eval(nova)
+
+        @js2py_ex
+        def resf(args, kwargs={}, allow_recursion=100):
+            return ek(sttr, args, kwargs)
+
+        return resf
 
     @js2py_ex
     def call_function(self, funcname, *args):
@@ -870,13 +913,12 @@ class JSInterpreter(_JSInterpreter):
 
     def build_function(self, argnames, code, *global_stack):
         nova = f'''
-            function(local_vars){{
-                Object.assign(this, local_vars);
-                return function ({",".join(argnames)}) {{
-                    {code}
-                }};
+            function(code, local_vars){{
+                _assign(this, local_vars);
+                return eval("function(){{"+code+"}}")();
             }}
         '''
+        ek = self.ctx.eval(nova)
 
         global_stack = list(global_stack) or [{}]
         argnames = tuple(argnames)
@@ -886,8 +928,6 @@ class JSInterpreter(_JSInterpreter):
             global_stack[0].update(itertools.zip_longest(argnames, args, fillvalue=None))
             global_stack[0].update(kwargs)
 
-            return self.ctx.eval(nova)(dict(x for y in reversed(global_stack) for x in y.items()))
+            return ek(code, dict(x for y in reversed(global_stack) for x in y.items()))
 
         return resf
-
-JSInterpreter = _JSInterpreter
