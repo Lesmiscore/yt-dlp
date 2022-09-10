@@ -843,8 +843,9 @@ class JSInterpreter(_JSInterpreter):
         objects = objects or {}
 
         def unitime(value):
-            print('unitime:', value)
-            return unified_timestamp(js2py.base.to_python(value))
+            value = js2py.base.to_python(value)
+            print('unitime:', value, type(value))
+            return unified_timestamp(value)
 
         objects['_ytdlp_unified_timestamp'] = unitime
         objects['print'] = print
