@@ -1,7 +1,10 @@
 # mini PoC to tinker with js2py
 
 import sys
+import os
 import re
+import subprocess
+import json
 
 from js2py import EvalJs
 from js2py.base import to_python
@@ -9,11 +12,8 @@ from js2py.translators import translate_js
 
 from yt_dlp.utils import unified_timestamp
 
-# with open(sys.argv[1], 'rt') as r, open(sys.argv[1] + '.translated.py', 'wt') as w:
-#     w.write(translate_js(r.read(), ''))
-
 def unitime(value):
-    return unified_timestamp(to_python(value))
+    return unified_timestamp(to_python(value)) * 1e3
 
 ctx = EvalJs({
     '_ytdlp_unified_timestamp': unitime,
@@ -70,16 +70,45 @@ ctx.execute('''
 ''')
 
 
-transfile = sys.argv[1] + '.translated.py'
-with open(sys.argv[1], 'rt') as r, open(transfile, 'wt') as w:
-    code = r.read()
-    # code = re.sub(r'catch\s*\((.)\)\s*{', r'catch(\1){print(\1.toString());', code)
-    # code = re.sub(r'catch\s*\((.)\)\s*{', r'catch(\1){throw \1;', code)
+if False:
+    TESTS = [
+        "1969-12-31T16:00:40.000-08:00",
+        "Thursday 01 January 1970 00:00:05 UTC",
+        "1969-12-31T20:00:53.000-04:00",
+        "01 January 1970 00:01:21 UTC",
+        "December 31 1969 13:45:41 -1015",
+        "01/01/1970 00:00:07 GMT",
+        "December 31 1969 20:00:53 EDT",
+        "1969-12-31T19:01:28.000-05:00",
+        "Wednesday December 31 1969 19:00:14 CDT",
+    ]
 
-    code = re.sub(r'try\s*{', r'{', code)
-    code = re.sub(r'catch\s*\((.)\)\s*{', r'if(false){', code)
-    code = re.sub(r'finally\s*{', r'{', code)
+    for tst in TESTS:
+        with subprocess.Popen(
+            ['node', '-e', f'console.log(new Date({json.dumps(tst)})/1e3)'],
+            stdout=subprocess.PIPE) as proc:
+            nodejs = int(proc.stdout.read().decode())
+        ytdlp = unified_timestamp(tst)
+        print(f'{tst}: nodejs {nodejs} yt-dlp {ytdlp} okay {nodejs == ytdlp}')
 
-    translated = translate_js(code, '')
-    w.write(translated)
+
+infile = sys.argv[1]
+transfile = infile + '.translated.py'
+with open(infile, 'rt') as r, open(transfile, 'wt') as w:
+    if infile.endswith('.py'):
+        os.unlink(transfile)
+        translated = r.read()
+        transfile = infile
+    else:
+        code = r.read()
+        code = re.sub(r'catch\s*\((.)\)\s*{', r'catch(\1){print(\1.toString());', code)
+        # code = re.sub(r'catch\s*\((.)\)\s*{', r'catch(\1){throw \1;', code)
+
+        # code = re.sub(r'try\s*{', r'{', code)
+        # code = re.sub(r'catch\s*\((.)\)\s*{', r'if(false){', code)
+        # code = re.sub(r'finally\s*{', r'{', code)
+
+        translated = translate_js(code, '')
+        w.write(translated)
+
     exec(compile(translated, transfile, 'exec'), ctx._context)

@@ -2,7 +2,7 @@ var.registers(['kk'])
 @Js
 def PyJsHoisted_kk_(local_vars, this, arguments, var=var):
     var = Scope({'local_vars':local_vars, 'this':this, 'arguments':arguments}, var)
-    var.registers(['c', 'b', 'local_vars'])
+    var.registers(['local_vars', 'b', 'c'])
     var.get('Object').callprop('assign', var.get(u"this"), var.get('local_vars'))
     var.put('b', var.get('a').callprop('split', Js('')))
     @Js
@@ -44,13 +44,13 @@ def PyJsHoisted_kk_(local_vars, this, arguments, var=var):
     @Js
     def PyJs_anonymous_1_(d, e, f, h, l, this, arguments, var=var):
         var = Scope({'d':d, 'e':e, 'f':f, 'h':h, 'l':l, 'this':this, 'arguments':arguments}, var)
-        var.registers(['l', 'd', 'e', 'h', 'f'])
+        var.registers(['e', 'd', 'f', 'h', 'l'])
         return var.get('e')(var.get('f'), var.get('h'), var.get('l'))
     PyJs_anonymous_1_._set_name('anonymous')
     @Js
     def PyJs_anonymous_2_(d, e, f, h, l, m, n, p, q, this, arguments, var=var):
         var = Scope({'d':d, 'e':e, 'f':f, 'h':h, 'l':l, 'm':m, 'n':n, 'p':p, 'q':q, 'this':this, 'arguments':arguments}, var)
-        var.registers(['l', 'q', 'd', 'p', 'n', 'm', 'e', 'h', 'f'])
+        var.registers(['m', 'q', 'e', 'd', 'p', 'n', 'f', 'h', 'l'])
         return var.get('f')(var.get('h'), var.get('l'), var.get('m'), var.get('n'), var.get('p'), var.get('q'))
     PyJs_anonymous_2_._set_name('anonymous')
     @Js
@@ -100,12 +100,12 @@ def PyJsHoisted_kk_(local_vars, this, arguments, var=var):
     @Js
     def PyJs_anonymous_4_(d, e, f, this, arguments, var=var):
         var = Scope({'d':d, 'e':e, 'f':f, 'this':this, 'arguments':arguments}, var)
-        var.registers(['e', 'd', 'h', 'f'])
+        var.registers(['e', 'f', 'h', 'd'])
         var.put('h', var.get('f').get('length'))
         @Js
         def PyJs_anonymous_5_(l, m, n, this, arguments, var=var):
             var = Scope({'l':l, 'm':m, 'n':n, 'this':this, 'arguments':arguments}, var)
-            var.registers(['n', 'l', 'm'])
+            var.registers(['n', 'm', 'l'])
             var.get(u"this").callprop('push', var.get('n').put(var.get('m'), var.get('f').get(((((var.get('f').callprop('indexOf', var.get('l'))-var.get('f').callprop('indexOf', var.get(u"this").get(var.get('m'))))+var.get('m'))+(var.put('h',Js(var.get('h').to_number())-Js(1))+Js(1)))%var.get('f').get('length')))))
         PyJs_anonymous_5_._set_name('anonymous')
         var.get('d').callprop('forEach', PyJs_anonymous_5_, var.get('e').callprop('split', Js('')))
@@ -123,7 +123,7 @@ def PyJsHoisted_kk_(local_vars, this, arguments, var=var):
     @Js
     def PyJs_anonymous_7_(d, e, f, h, l, m, n, p, this, arguments, var=var):
         var = Scope({'d':d, 'e':e, 'f':f, 'h':h, 'l':l, 'm':m, 'n':n, 'p':p, 'this':this, 'arguments':arguments}, var)
-        var.registers(['l', 'd', 'p', 'n', 'm', 'e', 'h', 'f'])
+        var.registers(['m', 'e', 'd', 'p', 'n', 'f', 'h', 'l'])
         return var.get('e')(var.get('f'), var.get('h'), var.get('l'), var.get('m'), var.get('n'), var.get('p'))
     PyJs_anonymous_7_._set_name('anonymous')
     @Js
@@ -166,7 +166,7 @@ def PyJsHoisted_kk_(local_vars, this, arguments, var=var):
     @Js
     def PyJs_anonymous_9_(d, this, arguments, var=var):
         var = Scope({'d':d, 'this':this, 'arguments':arguments}, var)
-        var.registers(['d', 'e'])
+        var.registers(['e', 'd'])
         #for JS loop
         var.put('e', var.get('d').get('length'))
         while var.get('e'):
@@ -202,7 +202,7 @@ def PyJsHoisted_kk_(local_vars, this, arguments, var=var):
     @Js
     def PyJs_anonymous_14_(d, e, this, arguments, var=var):
         var = Scope({'d':d, 'e':e, 'this':this, 'arguments':arguments}, var)
-        var.registers(['e', 'd', 'f'])
+        var.registers(['f', 'd', 'e'])
         var.put('d', (((var.get('d')%var.get('e').get('length'))+var.get('e').get('length'))%var.get('e').get('length')))
         var.put('f', var.get('e').get('0'))
         var.get('e').put('0', var.get('e').get(var.get('d')))
@@ -231,7 +231,7 @@ def PyJsHoisted_kk_(local_vars, this, arguments, var=var):
     @Js
     def PyJs_anonymous_18_(d, e, f, h, l, m, this, arguments, var=var):
         var = Scope({'d':d, 'e':e, 'f':f, 'h':h, 'l':l, 'm':m, 'this':this, 'arguments':arguments}, var)
-        var.registers(['l', 'd', 'm', 'e', 'h', 'f'])
+        var.registers(['m', 'e', 'd', 'f', 'h', 'l'])
         return var.get('e')(var.get('h'), var.get('l'), var.get('m'))
     PyJs_anonymous_18_._set_name('anonymous')
     @Js
