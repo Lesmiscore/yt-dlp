@@ -13,7 +13,7 @@ from js2py.translators import translate_js
 from yt_dlp.utils import unified_timestamp
 
 def unitime(value):
-    return unified_timestamp(to_python(value)) * 1e3
+    return int(unified_timestamp(to_python(value)) * 1e3)
 
 ctx = EvalJs({
     '_ytdlp_unified_timestamp': unitime,

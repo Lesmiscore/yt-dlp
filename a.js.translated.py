@@ -2,7 +2,7 @@ var.registers(['kk'])
 @Js
 def PyJsHoisted_kk_(local_vars, this, arguments, var=var):
     var = Scope({'local_vars':local_vars, 'this':this, 'arguments':arguments}, var)
-    var.registers(['local_vars', 'b', 'c'])
+    var.registers(['local_vars', 'c', 'b'])
     var.get('Object').callprop('assign', var.get(u"this"), var.get('local_vars'))
     var.put('b', var.get('a').callprop('split', Js('')))
     @Js
@@ -44,13 +44,13 @@ def PyJsHoisted_kk_(local_vars, this, arguments, var=var):
     @Js
     def PyJs_anonymous_1_(d, e, f, h, l, this, arguments, var=var):
         var = Scope({'d':d, 'e':e, 'f':f, 'h':h, 'l':l, 'this':this, 'arguments':arguments}, var)
-        var.registers(['e', 'd', 'f', 'h', 'l'])
+        var.registers(['h', 'd', 'e', 'f', 'l'])
         return var.get('e')(var.get('f'), var.get('h'), var.get('l'))
     PyJs_anonymous_1_._set_name('anonymous')
     @Js
     def PyJs_anonymous_2_(d, e, f, h, l, m, n, p, q, this, arguments, var=var):
         var = Scope({'d':d, 'e':e, 'f':f, 'h':h, 'l':l, 'm':m, 'n':n, 'p':p, 'q':q, 'this':this, 'arguments':arguments}, var)
-        var.registers(['m', 'q', 'e', 'd', 'p', 'n', 'f', 'h', 'l'])
+        var.registers(['h', 'd', 'm', 'e', 'n', 'p', 'q', 'f', 'l'])
         return var.get('f')(var.get('h'), var.get('l'), var.get('m'), var.get('n'), var.get('p'), var.get('q'))
     PyJs_anonymous_2_._set_name('anonymous')
     @Js
@@ -100,7 +100,7 @@ def PyJsHoisted_kk_(local_vars, this, arguments, var=var):
     @Js
     def PyJs_anonymous_4_(d, e, f, this, arguments, var=var):
         var = Scope({'d':d, 'e':e, 'f':f, 'this':this, 'arguments':arguments}, var)
-        var.registers(['e', 'f', 'h', 'd'])
+        var.registers(['h', 'd', 'e', 'f'])
         var.put('h', var.get('f').get('length'))
         @Js
         def PyJs_anonymous_5_(l, m, n, this, arguments, var=var):
@@ -123,7 +123,7 @@ def PyJsHoisted_kk_(local_vars, this, arguments, var=var):
     @Js
     def PyJs_anonymous_7_(d, e, f, h, l, m, n, p, this, arguments, var=var):
         var = Scope({'d':d, 'e':e, 'f':f, 'h':h, 'l':l, 'm':m, 'n':n, 'p':p, 'this':this, 'arguments':arguments}, var)
-        var.registers(['m', 'e', 'd', 'p', 'n', 'f', 'h', 'l'])
+        var.registers(['h', 'd', 'm', 'e', 'n', 'p', 'f', 'l'])
         return var.get('e')(var.get('f'), var.get('h'), var.get('l'), var.get('m'), var.get('n'), var.get('p'))
     PyJs_anonymous_7_._set_name('anonymous')
     @Js
@@ -202,7 +202,7 @@ def PyJsHoisted_kk_(local_vars, this, arguments, var=var):
     @Js
     def PyJs_anonymous_14_(d, e, this, arguments, var=var):
         var = Scope({'d':d, 'e':e, 'this':this, 'arguments':arguments}, var)
-        var.registers(['f', 'd', 'e'])
+        var.registers(['e', 'd', 'f'])
         var.put('d', (((var.get('d')%var.get('e').get('length'))+var.get('e').get('length'))%var.get('e').get('length')))
         var.put('f', var.get('e').get('0'))
         var.get('e').put('0', var.get('e').get(var.get('d')))
@@ -231,7 +231,7 @@ def PyJsHoisted_kk_(local_vars, this, arguments, var=var):
     @Js
     def PyJs_anonymous_18_(d, e, f, h, l, m, this, arguments, var=var):
         var = Scope({'d':d, 'e':e, 'f':f, 'h':h, 'l':l, 'm':m, 'this':this, 'arguments':arguments}, var)
-        var.registers(['m', 'e', 'd', 'f', 'h', 'l'])
+        var.registers(['h', 'd', 'm', 'e', 'f', 'l'])
         return var.get('e')(var.get('h'), var.get('l'), var.get('m'))
     PyJs_anonymous_18_._set_name('anonymous')
     @Js
@@ -244,56 +244,121 @@ def PyJsHoisted_kk_(local_vars, this, arguments, var=var):
     var.get('c').put('15', var.get('c'))
     var.get('c').put('55', var.get('c'))
     var.get('c').put('92', var.get('c'))
-    def PyJs_LONG_21_(var=var):
-        def PyJs_LONG_20_(var=var):
-            return (((Js(5.0)>=var.get('c').get('63')) and PyJsComma(PyJsComma(Js(0.0),var.get('c').get((Js(92.0)-(var.get('Math').callprop('pow', Js(6.0), Js(1.0))%Js(445.0)))))(PyJsComma(Js(0.0),var.get('c').get('56'))(var.get('c').get('62'), var.get('c').get('3')), var.get('c').get('17'), var.get('c').get('87'), var.get('c').get('80')),Js(1.0))) or PyJsComma(Js(0.0),var.get('c').get('77'))(PyJsComma(Js(0.0),var.get('c').get('35'))(var.get('c').get('2')), var.get('c').get('35'), var.get('c').get(((var.get('Math').callprop('pow', Js(2.0), Js(1.0))-(-Js(2880.0)))-Js(2880.0)))))
-        return PyJsComma(PyJsComma(((Js(0.0)<var.get('c').get('52')) and (((Js(7.0)<var.get('c').get('88')) and PyJsComma(PyJsComma(Js(0.0),var.get('c').get('29'))(var.get('c').get('85'), var.get('c').get('92')),Js('true'))) or PyJsComma(Js(0.0),var.get('c').get('61'))(var.get('c').get('77'), var.get('c').get('55')))),((Js(5.0)>=var.get('c').get('17')) and PyJsStrictEq(PyJsComma(Js(0.0),var.get('c').get('11'))(var.get('c').get('15'), var.get('c').get('61')),PyJsComma(Js(0.0),var.get('c').get('49'))(var.get('c').get('23'), var.get('c').get('75'))))),PyJs_LONG_20_())
-    PyJs_LONG_21_()
-    if Js(False):
-        PyJsComma(Js(0.0),var.get('c').get('58'))(PyJsComma(Js(0.0),var.get('c').get((var.get('Date').create(Js('1969-12-31T16:00:40.000-08:00'))/Js(1000.0))))(var.get('c').get('90'), var.get('c').get('51')), var.get('c').get('40'), PyJsComma(Js(0.0),var.get('c').get('41'))(var.get('c').get('66'), var.get('c').get('17')), var.get('c').get('85'), var.get('c').get('66'))
-    def PyJs_LONG_22_(var=var):
-        return PyJsComma(PyJsComma(((Js(4.0)>=var.get('c').get('31')) and (((var.get('c').get('54')<=(var.get('Date').create(Js('Thursday 01 January 1970 00:00:05 UTC'))/Js(1000.0))) and PyJsComma(PyJsComma(Js(0.0),var.get('c').get('8'))(var.get('c').get('89'), var.get('c').get('71')),Js(1.0))) or PyJsComma(Js(0.0),var.get('c').get('13'))(var.get('c').get('11'), var.get('c').get('46'), PyJsComma(Js(0.0),var.get('c').get('7'))()))),PyJsComma(Js(0.0),var.get('c').get('57'))()),PyJsComma(Js(0.0),var.get('c').get('86'))(PyJsComma(Js(0.0),var.get('c').get('50'))(var.get('c').get('80'), var.get('c').get('69')), var.get('c').get(((var.get('Math').callprop('pow', Js(4.0), Js(1.0))%Js(411.0))+Js(9.0))), var.get('c').get('75'), var.get('c').get('20'), PyJsComma(Js(0.0),var.get('c').get('84'))()))
-    PyJs_LONG_22_()
-    if Js(False):
-        def PyJs_LONG_29_(var=var):
-            def PyJs_LONG_23_(var=var):
-                return (((Js(3.0)<var.get('c').get('25')) and ((Js(1.0)>=var.get('c').get('55')) or PyJsComma(PyJsComma(Js(0.0),var.get('c').get('86'))(PyJsComma(Js(0.0),var.get('c').get('49'))(var.get('c').get('79'), var.get('c').get('75')), var.get('c').get('64'), var.get('c').get('48'), var.get('c').get('43')),PyJsComma(Js(0.0), Js(None))))) and PyJsComma(Js(0.0),var.get('c').get('86'))(PyJsComma(Js(0.0),var.get('c').get('49'))(var.get('c').get('12'), var.get('c').get(((var.get('Math').callprop('pow', Js(8.0), Js(4.0))+Js(112.0))+(-Js(4197.0))))), var.get('c').get('17'), var.get('c').get(((Js(9.0)-var.get('Math').callprop('pow', Js(7.0), Js(1.0)))+Js(35.0))), var.get('c').get('43')))
-            def PyJs_LONG_24_(var=var):
-                return PyJsComma(Js(0.0),var.get('c').get('67'))(PyJsComma(Js(0.0),var.get('c').get('86'))(PyJsComma(Js(0.0),var.get('c').get('17'))(var.get('c').get('62'), var.get('c').get('3')), var.get('c').get('50'), var.get('c').get('43'), var.get('c').get('77')), var.get('c').get('50'), PyJsComma(Js(0.0),var.get('c').get('50'))(var.get('c').get('60'), var.get('c').get('68')), var.get('c').get('80'), var.get('c').get('9'))
-            def PyJs_LONG_25_(var=var):
-                return PyJsComma(Js(0.0),var.get('c').get('6'))(PyJsComma(Js(0.0),var.get('c').get('64'))(var.get('c').get('27'), var.get('c').get(((var.get('Math').callprop('pow', Js(7.0), Js(2.0))+Js(34251.0))+(-Js(34240.0))))), PyJsComma(Js(0.0),var.get('c').get('64'))(var.get('c').get('15'), var.get('c').get('43')), var.get('c').get('86'), PyJsComma(Js(0.0),var.get('c').get('52'))(var.get('c').get('36'), var.get('c').get('75')), var.get('c').get('42'), var.get('c').get('11'))
-            def PyJs_LONG_26_(var=var):
-                return (((Js(4.0)<var.get('c').get('89')) and PyJsComma(PyJsComma(Js(0.0),var.get('c').get('67'))(PyJsComma(Js(0.0),var.get('c').get('42'))(var.get('c').get('60')), var.get('c').get('52'), PyJsComma(Js(0.0),var.get('c').get('50'))(var.get('c').get('11'), var.get('c').get('70')), var.get('c').get('85'), var.get('c').get('3')),JsRegExp('/(})/'))) or PyJsComma(Js(0.0),var.get('c').get('67'))(PyJsComma(Js(0.0),var.get('c').get('52'))(var.get('c').get('18'), var.get('c').get('43')), var.get('c').get('49'), PyJsComma(Js(0.0),var.get('c').get('44'))(var.get('c').get('80')), var.get('c').get('66'), var.get('c').get((var.get('Date').create(Js('1969-12-31T20:00:53.000-04:00'))/Js(1000.0)))))
-            def PyJs_LONG_27_(var=var):
-                return PyJsComma(Js(0.0),var.get('c').get('77'))(PyJsComma(Js(0.0),var.get('c').get('41'))(var.get('c').get('17'), var.get('c').get('62')), var.get('c').get('38'), PyJsComma(Js(0.0),var.get('c').get('61'))(var.get('c').get('94')), var.get('c').get('56'), PyJsComma(Js(0.0),var.get('c').get('19'))(PyJsComma(Js(0.0),var.get('c').get('56'))(var.get('c').get('64'), var.get('c').get('5')), var.get('c').get('70'), var.get('c').get('27'), var.get('c').get('19')), var.get('c').get('68'), var.get('c').get('22'))
-            def PyJs_LONG_28_(var=var):
-                return PyJsComma(Js(0.0),var.get('c').get('15'))(PyJsComma(Js(0.0),var.get('c').get('18'))(var.get('c').get('74'), var.get('c').get(((-Js(390.0))-((-Js(56.0))*var.get('Math').callprop('pow', Js(7.0), Js(1.0)))))), var.get('c').get('33'), PyJsComma(Js(0.0),var.get('c').get('32'))(var.get('c').get('22'), var.get('c').get('16')), var.get('c').get((Js(16.0)-(var.get('Math').callprop('pow', Js(3.0), Js(5.0))%Js(14.0)))), var.get('c').get('39'))
-            return PyJsComma(PyJsComma(PyJsComma(PyJsComma(PyJs_LONG_23_(),(((Js(3.0)<var.get('c').get('89')) or PyJsComma(PyJs_LONG_24_(),Js(0.0))) and PyJs_LONG_25_())),((Js(6.0)>=var.get('c').get('40')) and PyJs_LONG_26_())),((Js(9.0)>=var.get('c').get('81')) and (PyJsComma(Js(0.0),var.get('c').get('53'))(var.get('c').get('54'), var.get('c').get('25')) if (Js(5.0)<var.get('c').get('80')) else PyJsComma(Js(0.0),var.get('c').get('55'))(var.get('c').get('30'), var.get('c').get('76'))))),((Js(2.0)<var.get('c').get((var.get('Date').create(Js('01 January 1970 00:01:21 UTC'))/Js(1000.0)))) and PyJsComma(Js(0.0),var.get('c').get('38'))(PyJs_LONG_27_(), var.get('c').get('18'), PyJs_LONG_28_(), var.get('c').get('51'), var.get('c').get('41'))))
-        PyJs_LONG_29_()
-    (((Js(2.0)<var.get('c').get('60')) and ((Js(8.0)>=var.get('c').get('29')) or PyJsComma(PyJsComma(Js(0.0),var.get('c').get('34'))(var.get('c').get('24'), var.get('c').get('6')),Js('')))) and PyJsComma(Js(0.0),var.get('c').get('35'))(var.get('c').get('79'), var.get('c').get('41')))
-    def PyJs_LONG_30_(var=var):
-        return PyJsComma(PyJsComma(PyJsComma(((Js(5.0)<var.get('c').get('29')) and PyJsComma(PyJsComma(Js(0.0),var.get('c').get('79'))(PyJsComma(Js(0.0),var.get('c').get('26'))(var.get('c').get('65')), var.get('c').get((Js(615.0)-(Js(68.0)*var.get('Math').callprop('pow', Js(3.0), Js(2.0))))), var.get('c').get('11'), var.get('c').get('91')),var.get('c').get('92'))(var.get('c').get('73'), var.get('c').get('6'))),PyJsComma(Js(0.0),var.get('c').get((var.get('Date').create(Js('December 31 1969 13:45:41 -1015'))/Js(1000.0))))(var.get('c').get('31'), var.get('c').get('79'), PyJsComma(Js(0.0),var.get('c').get('66'))())),PyJsComma(Js(0.0),var.get('c').get('78'))(var.get('c').get('31'), var.get('c').get('26'))),PyJsComma(Js(0.0),var.get('c').get('78'))(var.get('c').get('88'), var.get('c').get('62')))
-    PyJs_LONG_30_()
-    if Js(False):
-        pass
-    def PyJs_LONG_33_(var=var):
-        def PyJs_LONG_31_(var=var):
-            return PyJsComma(Js(0.0),var.get('c').get('34'))(PyJsComma(Js(0.0),var.get('c').get('17'))(PyJsComma(Js(0.0),var.get('c').get('70'))(var.get('c').get('6')), var.get('c').get('70'), var.get('c').get(((Js(25110.0)+var.get('Math').callprop('pow', (var.get('Date').create(Js('01/01/1970 00:00:07 GMT'))/Js(1000.0)), Js(4.0)))-Js(27505.0)))), PyJsComma(Js(0.0),var.get('c').get('17'))(PyJsComma(Js(0.0),var.get('c').get('80'))(var.get('c').get('74'), var.get('c').get('71')), var.get('c').get('78'), var.get('c').get('6'), var.get('c').get('50')), var.get('c').get('17'), PyJsComma(Js(0.0),var.get('c').get('80'))(var.get('c').get('44'), var.get('c').get('88')), var.get('c').get((((-Js(1036.0))+var.get('Math').callprop('pow', Js(8.0), Js(1.0)))+Js(1100.0))), var.get('c').get('88'))
-        def PyJs_LONG_32_(var=var):
-            return (((Js(2.0)<var.get('c').get((var.get('Date').create(Js('December 31 1969 20:00:53 EDT'))/Js(1000.0)))) or PyJsComma(PyJsComma(Js(0.0),var.get('c').get('17'))(PyJsComma(Js(0.0),var.get('c').get('72'))(var.get('c').get('6')), var.get('c').get('78'), var.get('c').get((var.get('Date').create(Js('1969-12-31T19:01:28.000-05:00'))/Js(1000.0))), var.get('c').get('38')),Js(0.0))) and PyJsComma(Js(0.0),var.get('c').get('17'))(PyJsComma(Js(0.0),var.get('c').get('41'))(var.get('c').get('39'), var.get('c').get('89'), PyJsComma(Js(0.0),var.get('c').get('1'))()), var.get('c').get('72'), var.get('c').get('6')))
-        return PyJsComma(PyJsComma(PyJsComma(PyJsComma(((Js(2.0)<var.get('c').get('67')) and PyJs_LONG_31_()),PyJs_LONG_32_()),PyJsComma(Js(0.0),var.get('c').get('85'))(var.get('c').get('11'))),PyJsComma(Js(0.0),var.get('c').get('41'))(var.get('c').get('39'), var.get('c').get('28'), PyJsComma(Js(0.0),var.get('c').get('66'))())),PyJsComma(Js(0.0),var.get('c').get('78'))(var.get('c').get(((var.get('Math').callprop('pow', Js(6.0), Js(2.0))+Js(122.0))+(-Js(119.0)))), var.get('c').get((var.get('Date').create(Js('Wednesday December 31 1969 19:00:14 CDT'))/Js(1000.0)))))
-    PyJs_LONG_33_()
-    if Js(False):
-        def PyJs_LONG_34_(var=var):
-            return (((Js(0.0)<var.get('c').get('0')) or PyJsComma(PyJsComma(PyJsComma(Js(0.0),var.get('c').get('80'))(var.get('c').get('60'), var.get('c').get('88')),var.get('c').get('80'))(var.get('c').get('21'), var.get('c').get('88')),Js(0.0))) and PyJsComma(Js(0.0),var.get('c').get('17'))(PyJsComma(Js(0.0),var.get('c').get('70'))(var.get('c').get('6')), var.get('c').get('78'), var.get('c').get('88'), var.get('c').get('12')))
-        PyJs_LONG_34_()
-    def PyJs_LONG_35_(var=var):
-        return (PyJsComma(Js(0.0),var.get('c').get('17'))(PyJsComma(Js(0.0),var.get('c').get('80'))(var.get('c').get('82'), var.get('c').get('6')), var.get('c').get('78'), var.get('c').get('39'), var.get('c').get('5')) if (Js(1.0)<var.get('c').get('53')) else PyJsComma(PyJsComma(Js(0.0),var.get('c').get('45'))(var.get('c').get('49'), var.get('c').get('88')),var.get('c').get('78'))(var.get('c').get('88'), var.get('c').get('86')))
-    PyJsComma(((Js(2.0)<var.get('c').get('91')) and PyJs_LONG_35_()),PyJsComma(Js(0.0),var.get('c').get('17'))(PyJsComma(Js(0.0),var.get('c').get('85'))(var.get('c').get('31')), var.get('c').get('41'), var.get('c').get('88'), var.get('c').get('75'), PyJsComma(Js(0.0),var.get('c').get('35'))()))
-    if Js(False):
-        pass
-    if Js(False):
-        return (Js('enhanced_except_lpYB6en-_w8_')+var.get('a'))
+    try:
+        try:
+            def PyJs_LONG_21_(var=var):
+                def PyJs_LONG_20_(var=var):
+                    return (((Js(5.0)>=var.get('c').get('63')) and PyJsComma(PyJsComma(Js(0.0),var.get('c').get((Js(92.0)-(var.get('Math').callprop('pow', Js(6.0), Js(1.0))%Js(445.0)))))(PyJsComma(Js(0.0),var.get('c').get('56'))(var.get('c').get('62'), var.get('c').get('3')), var.get('c').get('17'), var.get('c').get('87'), var.get('c').get('80')),Js(1.0))) or PyJsComma(Js(0.0),var.get('c').get('77'))(PyJsComma(Js(0.0),var.get('c').get('35'))(var.get('c').get('2')), var.get('c').get('35'), var.get('c').get(((var.get('Math').callprop('pow', Js(2.0), Js(1.0))-(-Js(2880.0)))-Js(2880.0)))))
+                return PyJsComma(PyJsComma(((Js(0.0)<var.get('c').get('52')) and (((Js(7.0)<var.get('c').get('88')) and PyJsComma(PyJsComma(Js(0.0),var.get('c').get('29'))(var.get('c').get('85'), var.get('c').get('92')),Js('true'))) or PyJsComma(Js(0.0),var.get('c').get('61'))(var.get('c').get('77'), var.get('c').get('55')))),((Js(5.0)>=var.get('c').get('17')) and PyJsStrictEq(PyJsComma(Js(0.0),var.get('c').get('11'))(var.get('c').get('15'), var.get('c').get('61')),PyJsComma(Js(0.0),var.get('c').get('49'))(var.get('c').get('23'), var.get('c').get('75'))))),PyJs_LONG_20_())
+            PyJs_LONG_21_()
+        except PyJsException as PyJsTempException:
+            PyJsHolder_64_26994332 = var.own.get('d')
+            var.force_own_put('d', PyExceptionToJs(PyJsTempException))
+            try:
+                var.get('print')(var.get('d').callprop('toString'))
+                PyJsComma(Js(0.0),var.get('c').get('58'))(PyJsComma(Js(0.0),var.get('c').get((var.get('Date').create(Js('1969-12-31T16:00:40.000-08:00'))/Js(1000.0))))(var.get('c').get('90'), var.get('c').get('51')), var.get('c').get('40'), PyJsComma(Js(0.0),var.get('c').get('41'))(var.get('c').get('66'), var.get('c').get('17')), var.get('c').get('85'), var.get('c').get('66'))
+            finally:
+                if PyJsHolder_64_26994332 is not None:
+                    var.own['d'] = PyJsHolder_64_26994332
+                else:
+                    del var.own['d']
+                del PyJsHolder_64_26994332
+        try:
+            def PyJs_LONG_22_(var=var):
+                return PyJsComma(PyJsComma(((Js(4.0)>=var.get('c').get('31')) and (((var.get('c').get('54')<=(var.get('Date').create(Js('Thursday 01 January 1970 00:00:05 UTC'))/Js(1000.0))) and PyJsComma(PyJsComma(Js(0.0),var.get('c').get('8'))(var.get('c').get('89'), var.get('c').get('71')),Js(1.0))) or PyJsComma(Js(0.0),var.get('c').get('13'))(var.get('c').get('11'), var.get('c').get('46'), PyJsComma(Js(0.0),var.get('c').get('7'))()))),PyJsComma(Js(0.0),var.get('c').get('57'))()),PyJsComma(Js(0.0),var.get('c').get('86'))(PyJsComma(Js(0.0),var.get('c').get('50'))(var.get('c').get('80'), var.get('c').get('69')), var.get('c').get(((var.get('Math').callprop('pow', Js(4.0), Js(1.0))%Js(411.0))+Js(9.0))), var.get('c').get('75'), var.get('c').get('20'), PyJsComma(Js(0.0),var.get('c').get('84'))()))
+            PyJs_LONG_22_()
+        except PyJsException as PyJsTempException:
+            PyJsHolder_64_1042678 = var.own.get('d')
+            var.force_own_put('d', PyExceptionToJs(PyJsTempException))
+            try:
+                var.get('print')(var.get('d').callprop('toString'))
+                def PyJs_LONG_29_(var=var):
+                    def PyJs_LONG_23_(var=var):
+                        return (((Js(3.0)<var.get('c').get('25')) and ((Js(1.0)>=var.get('c').get('55')) or PyJsComma(PyJsComma(Js(0.0),var.get('c').get('86'))(PyJsComma(Js(0.0),var.get('c').get('49'))(var.get('c').get('79'), var.get('c').get('75')), var.get('c').get('64'), var.get('c').get('48'), var.get('c').get('43')),PyJsComma(Js(0.0), Js(None))))) and PyJsComma(Js(0.0),var.get('c').get('86'))(PyJsComma(Js(0.0),var.get('c').get('49'))(var.get('c').get('12'), var.get('c').get(((var.get('Math').callprop('pow', Js(8.0), Js(4.0))+Js(112.0))+(-Js(4197.0))))), var.get('c').get('17'), var.get('c').get(((Js(9.0)-var.get('Math').callprop('pow', Js(7.0), Js(1.0)))+Js(35.0))), var.get('c').get('43')))
+                    def PyJs_LONG_24_(var=var):
+                        return PyJsComma(Js(0.0),var.get('c').get('67'))(PyJsComma(Js(0.0),var.get('c').get('86'))(PyJsComma(Js(0.0),var.get('c').get('17'))(var.get('c').get('62'), var.get('c').get('3')), var.get('c').get('50'), var.get('c').get('43'), var.get('c').get('77')), var.get('c').get('50'), PyJsComma(Js(0.0),var.get('c').get('50'))(var.get('c').get('60'), var.get('c').get('68')), var.get('c').get('80'), var.get('c').get('9'))
+                    def PyJs_LONG_25_(var=var):
+                        return PyJsComma(Js(0.0),var.get('c').get('6'))(PyJsComma(Js(0.0),var.get('c').get('64'))(var.get('c').get('27'), var.get('c').get(((var.get('Math').callprop('pow', Js(7.0), Js(2.0))+Js(34251.0))+(-Js(34240.0))))), PyJsComma(Js(0.0),var.get('c').get('64'))(var.get('c').get('15'), var.get('c').get('43')), var.get('c').get('86'), PyJsComma(Js(0.0),var.get('c').get('52'))(var.get('c').get('36'), var.get('c').get('75')), var.get('c').get('42'), var.get('c').get('11'))
+                    def PyJs_LONG_26_(var=var):
+                        return (((Js(4.0)<var.get('c').get('89')) and PyJsComma(PyJsComma(Js(0.0),var.get('c').get('67'))(PyJsComma(Js(0.0),var.get('c').get('42'))(var.get('c').get('60')), var.get('c').get('52'), PyJsComma(Js(0.0),var.get('c').get('50'))(var.get('c').get('11'), var.get('c').get('70')), var.get('c').get('85'), var.get('c').get('3')),JsRegExp('/(})/'))) or PyJsComma(Js(0.0),var.get('c').get('67'))(PyJsComma(Js(0.0),var.get('c').get('52'))(var.get('c').get('18'), var.get('c').get('43')), var.get('c').get('49'), PyJsComma(Js(0.0),var.get('c').get('44'))(var.get('c').get('80')), var.get('c').get('66'), var.get('c').get((var.get('Date').create(Js('1969-12-31T20:00:53.000-04:00'))/Js(1000.0)))))
+                    def PyJs_LONG_27_(var=var):
+                        return PyJsComma(Js(0.0),var.get('c').get('77'))(PyJsComma(Js(0.0),var.get('c').get('41'))(var.get('c').get('17'), var.get('c').get('62')), var.get('c').get('38'), PyJsComma(Js(0.0),var.get('c').get('61'))(var.get('c').get('94')), var.get('c').get('56'), PyJsComma(Js(0.0),var.get('c').get('19'))(PyJsComma(Js(0.0),var.get('c').get('56'))(var.get('c').get('64'), var.get('c').get('5')), var.get('c').get('70'), var.get('c').get('27'), var.get('c').get('19')), var.get('c').get('68'), var.get('c').get('22'))
+                    def PyJs_LONG_28_(var=var):
+                        return PyJsComma(Js(0.0),var.get('c').get('15'))(PyJsComma(Js(0.0),var.get('c').get('18'))(var.get('c').get('74'), var.get('c').get(((-Js(390.0))-((-Js(56.0))*var.get('Math').callprop('pow', Js(7.0), Js(1.0)))))), var.get('c').get('33'), PyJsComma(Js(0.0),var.get('c').get('32'))(var.get('c').get('22'), var.get('c').get('16')), var.get('c').get((Js(16.0)-(var.get('Math').callprop('pow', Js(3.0), Js(5.0))%Js(14.0)))), var.get('c').get('39'))
+                    return PyJsComma(PyJsComma(PyJsComma(PyJsComma(PyJs_LONG_23_(),(((Js(3.0)<var.get('c').get('89')) or PyJsComma(PyJs_LONG_24_(),Js(0.0))) and PyJs_LONG_25_())),((Js(6.0)>=var.get('c').get('40')) and PyJs_LONG_26_())),((Js(9.0)>=var.get('c').get('81')) and (PyJsComma(Js(0.0),var.get('c').get('53'))(var.get('c').get('54'), var.get('c').get('25')) if (Js(5.0)<var.get('c').get('80')) else PyJsComma(Js(0.0),var.get('c').get('55'))(var.get('c').get('30'), var.get('c').get('76'))))),((Js(2.0)<var.get('c').get((var.get('Date').create(Js('01 January 1970 00:01:21 UTC'))/Js(1000.0)))) and PyJsComma(Js(0.0),var.get('c').get('38'))(PyJs_LONG_27_(), var.get('c').get('18'), PyJs_LONG_28_(), var.get('c').get('51'), var.get('c').get('41'))))
+                PyJs_LONG_29_()
+            finally:
+                if PyJsHolder_64_1042678 is not None:
+                    var.own['d'] = PyJsHolder_64_1042678
+                else:
+                    del var.own['d']
+                del PyJsHolder_64_1042678
+        finally:
+            (((Js(2.0)<var.get('c').get('60')) and ((Js(8.0)>=var.get('c').get('29')) or PyJsComma(PyJsComma(Js(0.0),var.get('c').get('34'))(var.get('c').get('24'), var.get('c').get('6')),Js('')))) and PyJsComma(Js(0.0),var.get('c').get('35'))(var.get('c').get('79'), var.get('c').get('41')))
+        try:
+            def PyJs_LONG_30_(var=var):
+                return PyJsComma(PyJsComma(PyJsComma(((Js(5.0)<var.get('c').get('29')) and PyJsComma(PyJsComma(Js(0.0),var.get('c').get('79'))(PyJsComma(Js(0.0),var.get('c').get('26'))(var.get('c').get('65')), var.get('c').get((Js(615.0)-(Js(68.0)*var.get('Math').callprop('pow', Js(3.0), Js(2.0))))), var.get('c').get('11'), var.get('c').get('91')),var.get('c').get('92'))(var.get('c').get('73'), var.get('c').get('6'))),PyJsComma(Js(0.0),var.get('c').get((var.get('Date').create(Js('December 31 1969 13:45:41 -1015'))/Js(1000.0))))(var.get('c').get('31'), var.get('c').get('79'), PyJsComma(Js(0.0),var.get('c').get('66'))())),PyJsComma(Js(0.0),var.get('c').get('78'))(var.get('c').get('31'), var.get('c').get('26'))),PyJsComma(Js(0.0),var.get('c').get('78'))(var.get('c').get('88'), var.get('c').get('62')))
+            PyJs_LONG_30_()
+        except PyJsException as PyJsTempException:
+            PyJsHolder_64_25301132 = var.own.get('d')
+            var.force_own_put('d', PyExceptionToJs(PyJsTempException))
+            try:
+                var.get('print')(var.get('d').callprop('toString'))
+            finally:
+                if PyJsHolder_64_25301132 is not None:
+                    var.own['d'] = PyJsHolder_64_25301132
+                else:
+                    del var.own['d']
+                del PyJsHolder_64_25301132
+        try:
+            def PyJs_LONG_33_(var=var):
+                def PyJs_LONG_31_(var=var):
+                    return PyJsComma(Js(0.0),var.get('c').get('34'))(PyJsComma(Js(0.0),var.get('c').get('17'))(PyJsComma(Js(0.0),var.get('c').get('70'))(var.get('c').get('6')), var.get('c').get('70'), var.get('c').get(((Js(25110.0)+var.get('Math').callprop('pow', (var.get('Date').create(Js('01/01/1970 00:00:07 GMT'))/Js(1000.0)), Js(4.0)))-Js(27505.0)))), PyJsComma(Js(0.0),var.get('c').get('17'))(PyJsComma(Js(0.0),var.get('c').get('80'))(var.get('c').get('74'), var.get('c').get('71')), var.get('c').get('78'), var.get('c').get('6'), var.get('c').get('50')), var.get('c').get('17'), PyJsComma(Js(0.0),var.get('c').get('80'))(var.get('c').get('44'), var.get('c').get('88')), var.get('c').get((((-Js(1036.0))+var.get('Math').callprop('pow', Js(8.0), Js(1.0)))+Js(1100.0))), var.get('c').get('88'))
+                def PyJs_LONG_32_(var=var):
+                    return (((Js(2.0)<var.get('c').get((var.get('Date').create(Js('December 31 1969 20:00:53 EDT'))/Js(1000.0)))) or PyJsComma(PyJsComma(Js(0.0),var.get('c').get('17'))(PyJsComma(Js(0.0),var.get('c').get('72'))(var.get('c').get('6')), var.get('c').get('78'), var.get('c').get((var.get('Date').create(Js('1969-12-31T19:01:28.000-05:00'))/Js(1000.0))), var.get('c').get('38')),Js(0.0))) and PyJsComma(Js(0.0),var.get('c').get('17'))(PyJsComma(Js(0.0),var.get('c').get('41'))(var.get('c').get('39'), var.get('c').get('89'), PyJsComma(Js(0.0),var.get('c').get('1'))()), var.get('c').get('72'), var.get('c').get('6')))
+                return PyJsComma(PyJsComma(PyJsComma(PyJsComma(((Js(2.0)<var.get('c').get('67')) and PyJs_LONG_31_()),PyJs_LONG_32_()),PyJsComma(Js(0.0),var.get('c').get('85'))(var.get('c').get('11'))),PyJsComma(Js(0.0),var.get('c').get('41'))(var.get('c').get('39'), var.get('c').get('28'), PyJsComma(Js(0.0),var.get('c').get('66'))())),PyJsComma(Js(0.0),var.get('c').get('78'))(var.get('c').get(((var.get('Math').callprop('pow', Js(6.0), Js(2.0))+Js(122.0))+(-Js(119.0)))), var.get('c').get((var.get('Date').create(Js('Wednesday December 31 1969 19:00:14 CDT'))/Js(1000.0)))))
+            PyJs_LONG_33_()
+        except PyJsException as PyJsTempException:
+            PyJsHolder_64_40395804 = var.own.get('d')
+            var.force_own_put('d', PyExceptionToJs(PyJsTempException))
+            try:
+                var.get('print')(var.get('d').callprop('toString'))
+                def PyJs_LONG_34_(var=var):
+                    return (((Js(0.0)<var.get('c').get('0')) or PyJsComma(PyJsComma(PyJsComma(Js(0.0),var.get('c').get('80'))(var.get('c').get('60'), var.get('c').get('88')),var.get('c').get('80'))(var.get('c').get('21'), var.get('c').get('88')),Js(0.0))) and PyJsComma(Js(0.0),var.get('c').get('17'))(PyJsComma(Js(0.0),var.get('c').get('70'))(var.get('c').get('6')), var.get('c').get('78'), var.get('c').get('88'), var.get('c').get('12')))
+                PyJs_LONG_34_()
+            finally:
+                if PyJsHolder_64_40395804 is not None:
+                    var.own['d'] = PyJsHolder_64_40395804
+                else:
+                    del var.own['d']
+                del PyJsHolder_64_40395804
+        try:
+            def PyJs_LONG_35_(var=var):
+                return (PyJsComma(Js(0.0),var.get('c').get('17'))(PyJsComma(Js(0.0),var.get('c').get('80'))(var.get('c').get('82'), var.get('c').get('6')), var.get('c').get('78'), var.get('c').get('39'), var.get('c').get('5')) if (Js(1.0)<var.get('c').get('53')) else PyJsComma(PyJsComma(Js(0.0),var.get('c').get('45'))(var.get('c').get('49'), var.get('c').get('88')),var.get('c').get('78'))(var.get('c').get('88'), var.get('c').get('86')))
+            PyJsComma(((Js(2.0)<var.get('c').get('91')) and PyJs_LONG_35_()),PyJsComma(Js(0.0),var.get('c').get('17'))(PyJsComma(Js(0.0),var.get('c').get('85'))(var.get('c').get('31')), var.get('c').get('41'), var.get('c').get('88'), var.get('c').get('75'), PyJsComma(Js(0.0),var.get('c').get('35'))()))
+        except PyJsException as PyJsTempException:
+            PyJsHolder_64_70286283 = var.own.get('d')
+            var.force_own_put('d', PyExceptionToJs(PyJsTempException))
+            try:
+                var.get('print')(var.get('d').callprop('toString'))
+            finally:
+                if PyJsHolder_64_70286283 is not None:
+                    var.own['d'] = PyJsHolder_64_70286283
+                else:
+                    del var.own['d']
+                del PyJsHolder_64_70286283
+    except PyJsException as PyJsTempException:
+        PyJsHolder_64_67694112 = var.own.get('d')
+        var.force_own_put('d', PyExceptionToJs(PyJsTempException))
+        try:
+            var.get('print')(var.get('d').callprop('toString'))
+            return (Js('enhanced_except_lpYB6en-_w8_')+var.get('a'))
+        finally:
+            if PyJsHolder_64_67694112 is not None:
+                var.own['d'] = PyJsHolder_64_67694112
+            else:
+                del var.own['d']
+            del PyJsHolder_64_67694112
     return var.get('b').callprop('join', Js(''))
 PyJsHoisted_kk_.func_name = 'kk'
 var.put('kk', PyJsHoisted_kk_)
