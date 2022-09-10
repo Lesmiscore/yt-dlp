@@ -89,7 +89,7 @@ if False:
             stdout=subprocess.PIPE) as proc:
             nodejs = int(proc.stdout.read().decode())
         ytdlp = unified_timestamp(tst)
-        print(f'{tst}: nodejs {nodejs} yt-dlp {ytdlp} okay {nodejs == ytdlp}')
+        print(f'{tst}:\tnodejs {nodejs} yt-dlp {ytdlp} okay {nodejs == ytdlp}')
 
 
 infile = sys.argv[1]
@@ -101,8 +101,20 @@ with open(infile, 'rt') as r, open(transfile, 'wt') as w:
         transfile = infile
     else:
         code = r.read()
-        code = re.sub(r'catch\s*\((.)\)\s*{', r'catch(\1){print(\1.toString());', code)
+        # code = re.sub(r'catch\s*\((.)\)\s*{', r'catch(\1){print(""+\1);', code)
         # code = re.sub(r'catch\s*\((.)\)\s*{', r'catch(\1){throw \1;', code)
+        catch_count = sum(1 for x in re.finditer(r'catch\s*\((.)\)\s*{', code))
+        occured = 0
+
+        def repl(x):
+            global occured
+            occured += 1
+            if occured >= catch_count:
+                # return f'catch({x.group(1)}){{print(""+{x.group(1)});'
+                return f'catch({x.group(1)}){{throw {x.group(1)};'
+            return x.group(0)
+
+        code = re.sub(r'catch\s*\((.)\)\s*{', repl, code)
 
         # code = re.sub(r'try\s*{', r'{', code)
         # code = re.sub(r'catch\s*\((.)\)\s*{', r'if(false){', code)
