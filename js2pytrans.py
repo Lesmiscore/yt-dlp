@@ -6,7 +6,7 @@ import re
 import subprocess
 import json
 
-from js2py import EvalJs
+from js2py import EvalJs, disable_pyimport
 from js2py.base import to_python
 from js2py.translators import translate_js
 
@@ -14,6 +14,8 @@ from yt_dlp.utils import unified_timestamp
 
 def unitime(value):
     return int(unified_timestamp(to_python(value)) * 1e3)
+
+disable_pyimport()
 
 ctx = EvalJs({
     '_ytdlp_unified_timestamp': unitime,

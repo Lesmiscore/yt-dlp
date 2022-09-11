@@ -825,6 +825,9 @@ class _JSInterpreter:
         return resf
 
 
+js2py.disable_pyimport()
+
+
 def js2py_ex(func):
     def inner(*args, **kw):
         if any('/js2py/' in x.filename.replace('\\', '/') for x in inspect.stack()[:2]):
