@@ -650,21 +650,24 @@ def timeconvert(timestr):
     return timestamp
 
 
-def sanitize_filename(s, restricted=False, is_id=NO_DEFAULT):
+def sanitize_filename(s, restricted=False, windows=False, is_id=NO_DEFAULT):
     """Sanitizes a string so it could be used as part of a filename.
-    @param restricted   Use a stricter subset of allowed characters
+    @param restricted   Use a stricter subset of allowed characters. This implies the windows parameter
+    @param windows      Use only characters accepted by Windows
     @param is_id        Whether this is an ID that should be kept unchanged if possible.
                         If unset, yt-dlp's new sanitization rules are in effect
     """
     if s == '':
         return ''
 
+    windows |= restricted
+
     def replace_insane(char):
         if restricted and char in ACCENT_CHARS:
             return ACCENT_CHARS[char]
         elif not restricted and char == '\n':
             return '\0 '
-        elif is_id is NO_DEFAULT and not restricted and char in '"*:<>?|/\\':
+        elif is_id is NO_DEFAULT and (windows or not restricted) and char in '"*:<>?|/\\':
             # Replace with their full-width unicode counterparts
             return {'/': '\u29F8', '\\': '\u29f9'}.get(char, chr(ord(char) + 0xfee0))
         elif char == '?' or ord(char) < 32 or ord(char) == 127:
